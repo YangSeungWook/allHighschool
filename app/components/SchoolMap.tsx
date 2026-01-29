@@ -7,8 +7,8 @@ import SearchBar from "./SearchBar";
 import FilterPanel, { Filters } from "./FilterPanel";
 import SchoolCard from "./SchoolCard";
 
-const KOREA_CENTER = { lat: 36.0, lng: 127.5 };
-const DEFAULT_LEVEL = 13;
+const KOREA_CENTER = { lat: 37.5174083, lng: 126.9754667 };
+const DEFAULT_LEVEL = 10;
 
 export default function SchoolMap() {
   const [schools, setSchools] = useState<School[]>([]);

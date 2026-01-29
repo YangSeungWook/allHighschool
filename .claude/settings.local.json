@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(del d:yswall-highschoolanalyze.js)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}

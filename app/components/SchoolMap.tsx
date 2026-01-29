@@ -13,7 +13,7 @@ const DEFAULT_LEVEL = 10;
 export default function SchoolMap() {
   const [schools, setSchools] = useState<School[]>([]);
   const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
-  const [center, setCenter] = useState(KOREA_CENTER);
+  const [mapInstance, setMapInstance] = useState<kakao.maps.Map | null>(null);
   const [level, setLevel] = useState(DEFAULT_LEVEL);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [filters, setFilters] = useState<Filters>({
@@ -52,9 +52,11 @@ export default function SchoolMap() {
 
   const handleSelectSchool = useCallback((school: School) => {
     setSelectedSchool(school);
-    setCenter({ lat: school.latitude, lng: school.longitude });
-    setLevel(4);
-  }, []);
+    if (mapInstance) {
+      mapInstance.setLevel(4);
+      mapInstance.panTo(new kakao.maps.LatLng(school.latitude, school.longitude));
+    }
+  }, [mapInstance]);
 
   const clusterStyles = [
     {
@@ -141,10 +143,10 @@ export default function SchoolMap() {
 
       {/* 카카오 지도 */}
       <Map
-        center={center}
-        isPanto
+        center={KOREA_CENTER}
         level={level}
         style={{ width: "100%", height: "100%" }}
+        onCreate={setMapInstance}
         onZoomChanged={(map) => setLevel(map.getLevel())}
       >
         <ZoomControl position="RIGHT" />

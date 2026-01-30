@@ -8,7 +8,7 @@ import FilterPanel, { Filters } from "./FilterPanel";
 import SchoolCard from "./SchoolCard";
 
 const KOREA_CENTER = { lat: 37.5174083, lng: 126.9754667 };
-const DEFAULT_LEVEL = 10;
+const DEFAULT_LEVEL = 5;
 
 export default function SchoolMap() {
   const [schools, setSchools] = useState<School[]>([]);
@@ -60,37 +60,37 @@ export default function SchoolMap() {
 
   const clusterStyles = [
     {
-      width: "40px",
-      height: "40px",
-      background: "rgba(59, 130, 246, 0.8)",
-      borderRadius: "20px",
+      width: "36px",
+      height: "36px",
+      background: "rgba(46, 125, 50, 0.85)",
+      borderRadius: "18px",
       color: "#fff",
       textAlign: "center" as const,
-      fontWeight: "bold",
-      lineHeight: "40px",
+      fontWeight: "600",
+      lineHeight: "36px",
+      fontSize: "12px",
+    },
+    {
+      width: "44px",
+      height: "44px",
+      background: "rgba(27, 94, 32, 0.85)",
+      borderRadius: "22px",
+      color: "#fff",
+      textAlign: "center" as const,
+      fontWeight: "600",
+      lineHeight: "44px",
       fontSize: "13px",
     },
     {
-      width: "50px",
-      height: "50px",
-      background: "rgba(37, 99, 235, 0.8)",
-      borderRadius: "25px",
+      width: "52px",
+      height: "52px",
+      background: "rgba(21, 67, 23, 0.9)",
+      borderRadius: "26px",
       color: "#fff",
       textAlign: "center" as const,
-      fontWeight: "bold",
-      lineHeight: "50px",
+      fontWeight: "700",
+      lineHeight: "52px",
       fontSize: "14px",
-    },
-    {
-      width: "60px",
-      height: "60px",
-      background: "rgba(29, 78, 216, 0.85)",
-      borderRadius: "30px",
-      color: "#fff",
-      textAlign: "center" as const,
-      fontWeight: "bold",
-      lineHeight: "60px",
-      fontSize: "15px",
     },
   ];
 
@@ -98,33 +98,48 @@ export default function SchoolMap() {
     <div className="relative h-screen w-screen overflow-hidden">
       {/* 사이드바 */}
       <div
-        className={`absolute left-0 top-0 z-10 h-full bg-white shadow-xl transition-transform duration-300 ${
+        className={`absolute left-0 top-0 z-10 flex h-full flex-col border-r border-gray-200 bg-white transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ width: "320px" }}
+        style={{ width: "340px" }}
       >
-        <div className="flex h-full flex-col">
-          <div className="border-b p-4">
-            <h1 className="mb-3 text-lg font-bold text-gray-900">
-              HiMap
-            </h1>
-            <SearchBar schools={schools} onSelect={handleSelectSchool} />
-          </div>
-          <div className="flex-1 overflow-y-auto p-4">
-            <FilterPanel
-              filters={filters}
-              regions={regions}
-              onChange={setFilters}
-            />
-            <div className="mt-4 rounded-lg bg-gray-50 p-3">
-              <p className="text-xs text-gray-500">
-                표시 학교:{" "}
-                <span className="font-semibold text-gray-900">
-                  {filteredSchools.length}
-                </span>
-                개
-              </p>
+        {/* 로고 + 검색 영역 */}
+        <div className="shrink-0 px-3 pt-3 pb-2">
+          <div className="mb-5 flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DB400]">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
             </div>
+            <h1 className="text-[17px] font-bold text-gray-900">HiMap</h1>
+            <span className="text-[11px] text-gray-400">전국 고등학교 지도</span>
+          </div>
+          <SearchBar schools={schools} onSelect={handleSelectSchool} />
+        </div>
+
+        {/* 구분선 */}
+        <div className="mx-6 border-t border-gray-100" />
+
+        {/* 필터 영역 */}
+        <div className="sidebar-scroll flex-1 overflow-y-auto px-3 py-2">
+          <FilterPanel
+            filters={filters}
+            regions={regions}
+            onChange={setFilters}
+          />
+        </div>
+
+        {/* 하단 요약 */}
+        <div className="shrink-0 border-t border-gray-100 px-6 py-4">
+          <div className="flex items-center justify-between">
+            <span className="text-[13px] text-gray-500">
+              검색 결과
+            </span>
+            <span className="text-[14px] font-bold text-[#2DB400]">
+              {filteredSchools.length}
+              <span className="ml-0.5 font-normal text-gray-500">개교</span>
+            </span>
           </div>
         </div>
       </div>
@@ -132,13 +147,21 @@ export default function SchoolMap() {
       {/* 사이드바 토글 버튼 */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className={`absolute top-4 z-20 rounded-r-lg bg-white px-2 py-3 shadow-md transition-all duration-300 ${
-          sidebarOpen ? "left-[320px]" : "left-0"
+        className={`absolute top-1/2 z-20 -translate-y-1/2 flex h-12 w-5 items-center justify-center rounded-r-md bg-white shadow-[2px_0_6px_rgba(0,0,0,0.1)] transition-all duration-300 hover:bg-gray-50 ${
+          sidebarOpen ? "left-[340px]" : "left-0"
         }`}
       >
-        <span className="text-sm text-gray-600">
-          {sidebarOpen ? "◀" : "▶"}
-        </span>
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#666"
+          strokeWidth="2.5"
+          className={`transition-transform ${sidebarOpen ? "" : "rotate-180"}`}
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
       </button>
 
       {/* 카카오 지도 */}
@@ -148,6 +171,7 @@ export default function SchoolMap() {
         style={{ width: "100%", height: "100%" }}
         onCreate={setMapInstance}
         onZoomChanged={(map) => setLevel(map.getLevel())}
+        onClick={() => setSelectedSchool(null)}
       >
         <ZoomControl position="RIGHT" />
         <MarkerClusterer
@@ -172,7 +196,7 @@ export default function SchoolMap() {
               lat: selectedSchool.latitude,
               lng: selectedSchool.longitude,
             }}
-            yAnchor={1.3}
+            yAnchor={1.4}
           >
             <SchoolCard
               school={selectedSchool}

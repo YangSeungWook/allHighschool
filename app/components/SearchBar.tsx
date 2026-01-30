@@ -48,7 +48,7 @@ export default function SearchBar({ schools, onSelect }: SearchBarProps) {
     <div ref={ref} className="relative">
       <div className="relative">
         <svg
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+          className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400"
           width="16"
           height="16"
           viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ export default function SearchBar({ schools, onSelect }: SearchBarProps) {
           type="text"
           value={query}
           placeholder="학교명, 주소 검색"
-          className="w-full rounded-lg border border-gray-200 bg-gray-50 py-3 pl-10 pr-10 text-[14px] text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#2DB400] focus:bg-white focus:ring-1 focus:ring-[#2DB400]"
+          className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2 pl-8 pr-5 text-[12px] text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#2DB400] focus:bg-white focus:ring-1 focus:ring-[#2DB400]"
           onChange={(e) => {
             setQuery(e.target.value);
             search(e.target.value);

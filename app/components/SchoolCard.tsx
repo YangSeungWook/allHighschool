@@ -22,7 +22,11 @@ const coedLabel: Record<string, string> = {
 
 export default function SchoolCard({ school, onClose }: SchoolCardProps) {
   return (
-    <div className="popup-arrow w-[300px] overflow-hidden rounded-lg bg-white shadow-[0_2px_12px_rgba(0,0,0,0.12)]">
+    <div
+      className="popup-arrow w-[300px] overflow-hidden rounded-lg bg-white shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
+      onMouseDown={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
+    >
       {/* 헤더 */}
       <div className="flex items-center justify-between border-b border-gray-100 px-5 py-3.5">
         <h3 className="text-[15px] font-bold text-gray-900">{school.name}</h3>
@@ -73,11 +77,13 @@ export default function SchoolCard({ school, onClose }: SchoolCardProps) {
 
         {/* 홈페이지 링크 */}
         {school.website && (
-          <a
-            href={school.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#2DB400] transition-colors hover:text-[#249900]"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(school.website, "_blank", "noopener,noreferrer");
+            }}
+            className="inline-flex cursor-pointer items-center gap-1.5 border-none bg-transparent p-0 text-[13px] font-medium text-[#2DB400] transition-colors hover:text-[#249900]"
           >
             홈페이지
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -85,7 +91,7 @@ export default function SchoolCard({ school, onClose }: SchoolCardProps) {
               <polyline points="15 3 21 3 21 9" />
               <line x1="10" y1="14" x2="21" y2="3" />
             </svg>
-          </a>
+          </button>
         )}
       </div>
     </div>

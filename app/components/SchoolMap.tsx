@@ -101,7 +101,7 @@ export default function SchoolMap() {
         className={`absolute left-0 top-0 z-10 flex h-full flex-col border-r border-gray-200 bg-white transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ width: "340px" }}
+        style={{ width: "280px" }}
       >
         {/* 로고 + 검색 영역 */}
         <div className="shrink-0 px-3 pt-3 pb-2">

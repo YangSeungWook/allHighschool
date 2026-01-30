@@ -35,7 +35,7 @@ function ToggleChip({
   return (
     <button
       onClick={onClick}
-      className={`rounded-[5px] border px-3.5 py-[7px] text-[13px] font-medium transition-all ${
+      className={`rounded-[5px] border px-2.5 py-[3px] text-[11px] cursor-pointer font-medium transition-all ${
         active
           ? "border-[#2DB400] bg-[#2DB400] text-white"
           : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50"
@@ -122,7 +122,7 @@ export default function FilterPanel({
         <select
           value={filters.region}
           onChange={(e) => onChange({ ...filters, region: e.target.value })}
-          className="w-full appearance-none rounded-[5px] border border-gray-200 bg-white px-3.5 py-2.5 text-[13px] text-gray-700 outline-none transition-colors focus:border-[#2DB400]"
+          className="w-full appearance-none rounded-[5px] border border-gray-200 bg-white px-2.5 py-1.5 text-[12px] text-gray-700 outline-none transition-colors focus:border-[#2DB400]"
         >
           <option value="">전체 지역</option>
           {regions.map((r) => (
@@ -138,7 +138,7 @@ export default function FilterPanel({
           onClick={() =>
             onChange({ types: [], coed: [], establishment: [], region: "" })
           }
-          className="mt-2 text-[13px] text-gray-400 underline underline-offset-2 transition-colors hover:text-gray-600"
+          className="mt-2 text-[13px] text-gray-400 underline underline-offset-2 transition-colors hover:text-gray-600 cursor-pointer"
         >
           필터 초기화
         </button>
